@@ -3,6 +3,7 @@ out/
 !**/src/main/**/out/
 !**/src/test/**/out/
 .idea
+AoC24.iml
 
 ### Eclipse ###
 .apt_generated
