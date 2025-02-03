@@ -1,11 +1,11 @@
-import Problem1.HistorianHysteria;
 import Problem2.RedNosedReports;
+import Problem3.MullItOver;
 
 public class Driver {
 
     public static void main(String[] args) {
-        RedNosedReports redNosedReports = new RedNosedReports(args[0]);
-        System.out.println(redNosedReports.getSafeLevels1());
-        System.out.println(redNosedReports.getSafeLevelsDampened2());
+        MullItOver mullItOver = new MullItOver(args[0]);
+        System.out.println(mullItOver.getSumOfMulInstructions1());
+        System.out.println(mullItOver.getSumOfEnabledMulInstructions2());
     }
 }

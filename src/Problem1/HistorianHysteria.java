@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class HistorianHysteria {
 
-    private String path;
+    private final String path;
 
     public HistorianHysteria(String path){
         this.path = path;
