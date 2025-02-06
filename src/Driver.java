@@ -1,11 +1,10 @@
-import Problem2.RedNosedReports;
-import Problem3.MullItOver;
+import Problem4.CeresSearch;
 
 public class Driver {
 
     public static void main(String[] args) {
-        MullItOver mullItOver = new MullItOver(args[0]);
-        System.out.println(mullItOver.getSumOfMulInstructions1());
-        System.out.println(mullItOver.getSumOfEnabledMulInstructions2());
+        CeresSearch ceresSearch = new CeresSearch(args[0]);
+        System.out.println(ceresSearch.countOccurrences1("XMAS"));
+        System.out.println(ceresSearch.countOccurences2("MAS"));
     }
 }
