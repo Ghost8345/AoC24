@@ -1,10 +1,11 @@
-import Problem4.CeresSearch;
+import Problem5.PrintQueue;
 
 public class Driver {
 
     public static void main(String[] args) {
-        CeresSearch ceresSearch = new CeresSearch(args[0]);
-        System.out.println(ceresSearch.countOccurrences1("XMAS"));
-        System.out.println(ceresSearch.countOccurences2("MAS"));
+        PrintQueue printQueue = new PrintQueue(args[0]);
+        System.out.println(printQueue.getSumOfMiddleCorrectUpdates1());
+        System.out.println(printQueue.getSumOfMiddleIncorrectUpdates2());
+
     }
 }
