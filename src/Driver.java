@@ -1,11 +1,12 @@
 import Problem5.PrintQueue;
+import Problem6.GuardGallivant;
 
 public class Driver {
 
     public static void main(String[] args) {
-        PrintQueue printQueue = new PrintQueue(args[0]);
-        System.out.println(printQueue.getSumOfMiddleCorrectUpdates1());
-        System.out.println(printQueue.getSumOfMiddleIncorrectUpdates2());
+        GuardGallivant guardGallivant = new GuardGallivant(args[0]);
+        System.out.println(guardGallivant.getDistinctGuardPositions1());
+        System.out.println(guardGallivant.getObstuctionPositionsForLoop2());;
 
     }
 }
