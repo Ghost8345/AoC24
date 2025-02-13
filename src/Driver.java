@@ -1,12 +1,12 @@
 import Problem5.PrintQueue;
 import Problem6.GuardGallivant;
+import Problem7.BridgeRepair;
 
 public class Driver {
 
     public static void main(String[] args) {
-        GuardGallivant guardGallivant = new GuardGallivant(args[0]);
-        System.out.println(guardGallivant.getDistinctGuardPositions1());
-        System.out.println(guardGallivant.getObstuctionPositionsForLoop2());;
+        BridgeRepair bridgeRepair = new BridgeRepair(args[0]);
+        System.out.println(bridgeRepair.getSumOfCorrectEquations());
 
     }
 }
