@@ -1,11 +1,9 @@
-import Problem8.ResonantCollinearity;
+import Problem9.DiskFragmenter;
 
 public class Driver {
 
     public static void main(String[] args) {
-        ResonantCollinearity resonantCollinearity = new ResonantCollinearity(args[0]);
-        System.out.println(resonantCollinearity.getUniqueAntinodes1());
-        System.out.println(resonantCollinearity.getUniqueAntinodes2());
-
+        DiskFragmenter diskFragmenter = new DiskFragmenter(args[0]);
+        System.out.println(diskFragmenter.getChecksum1());
     }
 }
