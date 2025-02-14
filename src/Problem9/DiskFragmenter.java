@@ -3,15 +3,16 @@ package Problem9;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DiskFragmenter {
     private final String path;
-    private final StringBuilder disk;
-    private static final char FREESPACE = '.';
+    private final ArrayList<String> disk;
+    private static final String FREESPACE = ".";
 
     public DiskFragmenter(String path) {
         this.path = path;
-        this.disk = new StringBuilder();
+        this.disk = new ArrayList<>();
         getInput();
     }
 
@@ -20,9 +21,14 @@ public class DiskFragmenter {
             String line = bufferedReader.readLine();
             int index = 0;
             for (int i = 0; i < line.length(); i+=2) {
-                disk.append(String.valueOf(index).repeat(Character.getNumericValue(line.charAt(i))));
-                if (i+1 < line.length())
-                    disk.append(String.valueOf(FREESPACE).repeat(Character.getNumericValue(line.charAt(i+1))));
+                for (int k = 0; k < Character.getNumericValue(line.charAt(i)); k++)
+                    disk.add(String.valueOf(index));
+
+                if (i+1 < line.length()) {
+                    for (int k = 0; k < Character.getNumericValue(line.charAt(i+1)); k++) {
+                        disk.add(FREESPACE);
+                    }
+                }
                 index++;
             }
         } catch (IOException e) {
@@ -33,32 +39,32 @@ public class DiskFragmenter {
     public long getChecksum1(){
         long res = 0;
         int l = 0;
-        int r = disk.length()-1;
+        int r = disk.size()-1;
 
         while (l < r) {
-            if (disk.charAt(l) != FREESPACE) {
+            if (!disk.get(l).equals(FREESPACE)) {
                 l++;
                 continue;
             }
 
-            char toReplace = disk.charAt(r);
-            while (toReplace == FREESPACE){
+            String toReplace = disk.get(r);
+            while (toReplace.equals(FREESPACE)){
                 r--;
-                toReplace = disk.charAt(r);
+                toReplace = disk.get(r);
             }
-            disk.setCharAt(l, toReplace);
-            disk.setCharAt(r, FREESPACE);
+            disk.set(l, toReplace);
+            disk.set(r, FREESPACE);
 
             l++;
             r--;
         }
 
-        for (int i = 0; i < disk.length(); i++) {
-            char c = disk.charAt(i);
-            if (c == FREESPACE)
+        for (int i = 0; i < disk.size(); i++) {
+            String s = disk.get(i);
+            if (s.equals(FREESPACE))
                 break;
 
-            res += (long) i * Character.getNumericValue(c);
+            res += (long) i * Integer.parseInt(s);
         }
 
         return res;
