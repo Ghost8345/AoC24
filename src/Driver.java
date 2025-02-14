@@ -1,12 +1,11 @@
-import Problem5.PrintQueue;
-import Problem6.GuardGallivant;
-import Problem7.BridgeRepair;
+import Problem8.ResonantCollinearity;
 
 public class Driver {
 
     public static void main(String[] args) {
-        BridgeRepair bridgeRepair = new BridgeRepair(args[0]);
-        System.out.println(bridgeRepair.getSumOfCorrectEquations());
+        ResonantCollinearity resonantCollinearity = new ResonantCollinearity(args[0]);
+        System.out.println(resonantCollinearity.getUniqueAntinodes1());
+        System.out.println(resonantCollinearity.getUniqueAntinodes2());
 
     }
 }
