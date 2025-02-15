@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DiskFragmenter {
     private final String path;
@@ -37,6 +38,7 @@ public class DiskFragmenter {
     }
 
     public long getChecksum1(){
+        List<String> disk = new ArrayList<>(this.disk);
         long res = 0;
         int l = 0;
         int r = disk.size()-1;
@@ -67,6 +69,66 @@ public class DiskFragmenter {
             res += (long) i * Integer.parseInt(s);
         }
 
+        return res;
+    }
+
+    public long getChecksum2(){
+        List<String> disk = new ArrayList<>(this.disk);
+        int maxFileId = -1;
+        for (String block : disk) {
+            if (!FREESPACE.equals(block)) {
+                maxFileId = Math.max(maxFileId, Integer.parseInt(block));
+            }
+        }
+
+        for (int fileId = maxFileId; fileId >= 0; fileId--) {
+            String targetFileId = String.valueOf(fileId);
+            List<Integer> fileIndices = new ArrayList<>();
+            for (int i = 0; i < disk.size(); i++) {
+                if (disk.get(i).equals(targetFileId)) {
+                    fileIndices.add(i);
+                }
+            }
+
+            int fileSize = fileIndices.size();
+            int bestFreeSpaceIndex = -1;
+
+            for (int i = 0; i < fileIndices.getFirst(); i++) {
+                if (FREESPACE.equals(disk.get(i))) {
+                    int currentFreeSpaceSize = 0;
+                    int currentFreeSpaceIndex = i;
+                    while (i < disk.size() && FREESPACE.equals(disk.get(i))) {
+                        currentFreeSpaceSize++;
+                        i++;
+                    }
+                    if (currentFreeSpaceSize >= fileSize) {
+                        bestFreeSpaceIndex = currentFreeSpaceIndex;
+                        break;
+                    }
+                }
+            }
+
+            if (bestFreeSpaceIndex != -1) {
+                String id = disk.get(fileIndices.getFirst());
+
+                for (int i = fileIndices.size() - 1; i >= 0; i--) {
+                    disk.set(fileIndices.get(i), FREESPACE);
+                }
+
+                for (int i = 0; i < fileSize; i++) {
+                    disk.set(bestFreeSpaceIndex + i, id);
+                }
+            }
+        }
+
+        long res = 0;
+        for (int i = 0; i < disk.size(); i++) {
+            String s = disk.get(i);
+            if (s.equals(FREESPACE))
+                continue;
+
+            res += (long) i * Integer.parseInt(s);
+        }
         return res;
     }
 }
