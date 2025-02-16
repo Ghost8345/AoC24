@@ -1,10 +1,10 @@
-import Problem9.DiskFragmenter;
+import Problem10.HoofIt;
 
 public class Driver {
 
     public static void main(String[] args) {
-        DiskFragmenter diskFragmenter = new DiskFragmenter(args[0]);
-        System.out.println(diskFragmenter.getChecksum1());
-        System.out.println(diskFragmenter.getChecksum2());
+        HoofIt hoofIt = new HoofIt(args[0]);
+        System.out.println(hoofIt.getTotalScoreOfTrailheads1());
+        System.out.println(hoofIt.getTotalRatingOfTrailhead2());
     }
 }
