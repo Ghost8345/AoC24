@@ -1,10 +1,9 @@
-import Problem10.HoofIt;
+import Problem11.PlutonianPebbles;
 
 public class Driver {
 
     public static void main(String[] args) {
-        HoofIt hoofIt = new HoofIt(args[0]);
-        System.out.println(hoofIt.getTotalScoreOfTrailheads1());
-        System.out.println(hoofIt.getTotalRatingOfTrailhead2());
+        PlutonianPebbles plutonianPebbles = new PlutonianPebbles(args[0]);
+        System.out.println(plutonianPebbles.getTotalStonesNum1(75));
     }
 }
