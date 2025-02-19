@@ -5,36 +5,24 @@ import java.util.Objects;
 public class RegionData {
     private int area;
     private int perimeter;
+    private int sides;
 
     public int getArea() {
         return area;
     }
 
-    public RegionData(int area, int perimeter) {
-        this.area = area;
-        this.perimeter = perimeter;
-    }
-
     public RegionData() {
         this. area = 0;
         this.perimeter = 0;
+        this.sides = 0;
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        RegionData that = (RegionData) o;
-        return area == that.area && perimeter == that.perimeter;
+    public int getSides() {
+        return sides;
     }
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(area, perimeter);
-    }
-
-    public void setArea(int area) {
-        this.area = area;
+    public void incrementSides() {
+        this.sides++;
     }
 
     public void incrementArea() {
@@ -43,10 +31,6 @@ public class RegionData {
 
     public int getPerimeter() {
         return perimeter;
-    }
-
-    public void setPerimeter(int perimeter) {
-        this.perimeter = perimeter;
     }
 
     public void incrementPerimeter() {
