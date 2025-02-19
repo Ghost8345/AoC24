@@ -1,11 +1,10 @@
 import Problem11.PlutonianPebbles;
+import Problem12.GardenGroups;
 
 public class Driver {
 
     public static void main(String[] args) {
-        PlutonianPebbles plutonianPebbles = new PlutonianPebbles(args[0]);
-        System.out.println(plutonianPebbles.getTotalStonesNum(6));
-        System.out.println(plutonianPebbles.getTotalStonesNum(25));
-        System.out.println(plutonianPebbles.getTotalStonesNum(75));
+        GardenGroups gardenGroups = new GardenGroups(args[0]);
+        System.out.println(gardenGroups.getTotalPrice1());
     }
 }
