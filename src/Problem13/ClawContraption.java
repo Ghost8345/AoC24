@@ -10,6 +10,8 @@ public class ClawContraption {
     private final String path;
     private final List<Machine> machines;
 
+    private static final long OFFSET = 10_000_000_000_000L;
+
     public ClawContraption(String path) {
         this.path = path;
         this.machines = new ArrayList<>();
@@ -21,7 +23,7 @@ public class ClawContraption {
         String xCoordinate = lineSplitted[2].split("\\+")[1];
         xCoordinate = xCoordinate.substring(0, xCoordinate.length()-1);
         String yCoordinate = lineSplitted[3].split("\\+")[1];
-        return new Location(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+        return new Location(Long.parseLong(xCoordinate), Long.parseLong(yCoordinate));
     }
 
     private Location getPrizeCoordinates(String line) {
@@ -29,7 +31,7 @@ public class ClawContraption {
         String xCoordinate = lineSplitted[1].split("=")[1];
         xCoordinate = xCoordinate.substring(0, xCoordinate.length()-1);
         String yCoordinate = lineSplitted[2].split("=")[1];
-        return new Location(Integer.parseInt(xCoordinate), Integer.parseInt(yCoordinate));
+        return new Location(Long.parseLong(xCoordinate), Long.parseLong(yCoordinate));
     }
 
     private void getInput(){
@@ -47,7 +49,7 @@ public class ClawContraption {
     }
 
     private int dfs(List<Button> buttons, Location currentLoc, Map<Location, Integer> memo) {
-        if (currentLoc.x() == 0 && currentLoc.y() == 0)
+        if (currentLoc.getX() == 0 && currentLoc.getY() == 0)
             return 0;
 
         if (memo.containsKey(currentLoc))
@@ -56,9 +58,9 @@ public class ClawContraption {
         int res = Integer.MAX_VALUE;
 
         for (Button button : buttons){
-            int newX = currentLoc.x() - button.location().x();
-            int newY = currentLoc.y() - button.location().y();
-            if (newX < 0 || currentLoc.y() - newY < 0)
+            long newX = currentLoc.getX() - button.location().getX();
+            long newY = currentLoc.getY() - button.location().getY();
+            if (newX < 0 || newY < 0)
                 continue;
 
             int minTokens = dfs(buttons, new Location(newX, newY), memo);
@@ -81,6 +83,44 @@ public class ClawContraption {
 
         for (Machine machine : machines) {
             res += getMinTokens(machine);
+        }
+
+        return res;
+    }
+
+    private long solveLinearly(Machine machine) {
+        long Ax = machine.a().location().getX(), Ay = machine.a().location().getY();
+        long Bx = machine.b().location().getX(), By = machine.b().location().getY();
+        long Px = machine.prize().getX(), Py = machine.prize().getY();
+        long costA = machine.a().cost(), costB = machine.b().cost();
+
+        long D = Ax * By - Ay * Bx;
+        long D_X = Px * By - Py * Bx;
+        long D_Y = Ax * Py - Px * Ay;
+
+        if (D_X % D != 0 || D_Y % D != 0)
+            return 0;
+
+        long nA = D_X / D;
+        long nB = D_Y / D;
+
+        if (nA < 0 || nB < 0)
+            return 0;
+
+        return (nA * costA + nB * costB);
+    }
+
+    public long getMinTokensForPossiblePrizes2() {
+        long res = 0;
+
+        for (Machine machine : machines) {
+            Location prizeLocation = machine.prize();
+            prizeLocation.setX(prizeLocation.getX() + OFFSET);
+            prizeLocation.setY(prizeLocation.getY() + OFFSET);
+        }
+
+        for (Machine machine : machines) {
+            res += solveLinearly(machine);
         }
 
         return res;
