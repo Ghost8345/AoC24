@@ -1,11 +1,11 @@
-import Problem13.ClawContraption;
+import Problem14.RestroomRedoubt;
 
 public class Driver {
 
     public static void main(String[] args) {
-        ClawContraption clawContraption = new ClawContraption(args[0]);
-        System.out.println(clawContraption.getMinTokensForPossiblePrizes1());
-        System.out.println(clawContraption.getMinTokensForPossiblePrizes2());
+        RestroomRedoubt restroomRedoubt = new RestroomRedoubt(args[0]);
+//        System.out.println(restroomRedoubt.getSafetyFactor1(100));
+        restroomRedoubt.writeGridsToFile(7772, 3);
 
     }
 }
